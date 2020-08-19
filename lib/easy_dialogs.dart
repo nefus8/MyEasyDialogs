@@ -1,1 +1,0 @@
-library easy_dialogs;

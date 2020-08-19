@@ -1,8 +1,8 @@
-name: easy_dialogs
+name: simple_dialogs
 description: This package will simplify you life by letting you create responsive dialogs automatically.
 version: 0.0.1
 author: Simon Braillard
-homepage:
+homepage: https://github.com/nefus8/SimpleDialogs
 
 environment:
   sdk: ">=2.7.0 <3.0.0"

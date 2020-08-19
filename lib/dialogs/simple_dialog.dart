@@ -3,9 +3,9 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class EasyDialog {
+class SimpleDialog {
   static void infoDialog({
-          @required BuildContext context,
+        @required BuildContext context,
         @required String title,
         @required String message,
         String dismissButtonText = 'OK',
@@ -64,7 +64,7 @@ class EasyDialog {
     }
   }
 
-  static void showDialogWithOptions({
+  static void dialogWithOptions({
     @required BuildContext context,
     @required String title,
     @required String message,
