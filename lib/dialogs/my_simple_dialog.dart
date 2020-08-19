@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class SimpleDialog {
+class MyEasyDialog {
   static void infoDialog({
         @required BuildContext context,
         @required String title,

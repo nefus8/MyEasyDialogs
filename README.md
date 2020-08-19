@@ -3,7 +3,7 @@ This package will make your life easier. It allows you to create dialogues that 
   
 ## Getting Started  
   
-To use this package, add `simple_dialogs` as a [dependency in your pubspec.yaml file](https://flutter.io/platform-plugins/).  
+To use this package, add `my_easy_dialogs` as a [dependency in your pubspec.yaml file](https://flutter.io/platform-plugins/).  
 
 There is two types of dialogs for now. The first one is **infoDialog**. It will display a simple dialog with a title, a message adn a button to dismiss the dialog. The second one is **dialogWithOptions**. It will display a dialog with two buttons and you can add your custom function for each buttons.
  
@@ -18,7 +18,7 @@ But you can customize other parameters, like the **button text** that by default
   
 ```dart  
 import 'package:flutter/material.dart';
-import 'package:simple_dialogs/dialogs/simple_dialog.dart';
+import 'package:my_easy_dialogs/dialogs/my_easy_dialog.dart';
 
 void main() {
   runApp(MyApp());
@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: MyHomePage(title: 'SimpleDialogs'),
+      home: MyHomePage(title: 'MyEasyDialogs'),
     );
   }
 }
@@ -53,7 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             FlatButton(
-              onPressed: () => SimpleDialog.infoDialog(
+              onPressed: () => MyEasyDialog.infoDialog(
                   context: context,
                   title: "Exemple",
                   message: "I'm an infoDialog exemple !"
@@ -61,7 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Text("Show infoDialog"),
             ),
             FlatButton(
-              onPressed: () => SimpleDialog.dialogWithOptions(
+              onPressed: () => MyEasyDialog.dialogWithOptions(
                   context: context,
                   title: "Exemple",
                   message: "I'm an infoDialog exemple !",
