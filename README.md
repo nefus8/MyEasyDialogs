@@ -1,7 +1,8 @@
+# MyEasyDialogs
 
 This package will make your life easier. It allows you to create dialogues that adapt visually to the OS used and allows you to display simple pop-up messages or with actions.
   
-# Getting Started  
+## Getting Started  
   
 To use this package, add `my_easy_dialogs` as a [dependency in your pubspec.yaml file](https://flutter.io/platform-plugins/).  
 
