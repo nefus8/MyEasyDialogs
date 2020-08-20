@@ -9,9 +9,15 @@ class MyEasyDialog {
     @required BuildContext context,
     @required String title,
     @required String message,
-    String dismissButtonText = 'OK', /// you can change the dismiss button text
-    double dismissButtonFontSize = 20, /// you can change the dismiss button font size too but only on android
-    double titleFontSize = 25, /// you can change the title font size too but only on android
+    String dismissButtonText = 'OK',
+
+    /// you can change the dismiss button text
+    double dismissButtonFontSize = 20,
+
+    /// you can change the dismiss button font size too but only on android
+    double titleFontSize = 25,
+
+    /// you can change the title font size too but only on android
   }) {
     if (Platform.isIOS) {
       /// This is to show the iOS dialog type with Cupertino Widgets
@@ -27,6 +33,7 @@ class MyEasyDialog {
                   dismissButtonText,
                   textAlign: TextAlign.justify,
                 ),
+
                 /// Does buttons are only to dismiss so the only function is the navigator that pops.
                 onPressed: () => Navigator.of(context).pop(),
               )
@@ -42,11 +49,11 @@ class MyEasyDialog {
           // return object of type Dialog
           return AlertDialog(
             title: Center(
-              child: new Text(
-                title,
-                style: TextStyle(fontSize: titleFontSize, fontWeight: FontWeight.bold),
-              )
-            ),
+                child: new Text(
+              title,
+              style: TextStyle(
+                  fontSize: titleFontSize, fontWeight: FontWeight.bold),
+            )),
             content: new Text(
               message,
               textAlign: TextAlign.justify,
@@ -58,7 +65,8 @@ class MyEasyDialog {
                   dismissButtonText,
                   style: TextStyle(fontSize: dismissButtonFontSize),
                 ),
-                  /// Does buttons are only to dismiss so the only function is the navigator that pops.
+
+                /// Does buttons are only to dismiss so the only function is the navigator that pops.
                 onPressed: () => Navigator.of(context).pop(),
               ),
             ],
@@ -68,17 +76,25 @@ class MyEasyDialog {
     }
   }
 
-   /// Here is the dialog with options, it's useful if you want to pop up a dialog where you can choose between two
-   /// options. One of them can be set as destructive action.
+  /// Here is the dialog with options, it's useful if you want to pop up a dialog where you can choose between two
+  /// options. One of them can be set as destructive action.
   static void dialogWithOptions(
       {@required BuildContext context,
       @required String title,
       @required String message,
-      String textLeftButton = 'OK', /// You can change the dismiss button text
-      String textRightButton = 'Cancel', /// You can change the other button text
-      Function onPressedLeftButton, /// You can add your custom functions for the two buttons
+      String textLeftButton = 'OK',
+
+      /// You can change the dismiss button text
+      String textRightButton = 'Cancel',
+
+      /// You can change the other button text
+      Function onPressedLeftButton,
+
+      /// You can add your custom functions for the two buttons
       Function onPressedRightButton,
-      bool isRightButtonADestructiveAction = true, /// If set to true, the right button will be considered as a destructive button and will be colored in red
+      bool isRightButtonADestructiveAction = true,
+
+      /// If set to true, the right button will be considered as a destructive button and will be colored in red
       double buttonFontSize = 20,
       double titleFontSize = 25}) {
     // flutter defined function
@@ -96,8 +112,12 @@ class MyEasyDialog {
                   textLeftButton,
                   textAlign: TextAlign.justify,
                 ),
-                isDefaultAction: true, /// This is the default action
-                onPressed: onPressedLeftButton != null /// If the function is null, we just pop the dialog.
+                isDefaultAction: true,
+
+                /// This is the default action
+                onPressed: onPressedLeftButton != null
+
+                    /// If the function is null, we just pop the dialog.
                     ? () => _popAndExecuteFunction(onPressedLeftButton, context)
                     : () => Navigator.of(context).pop(),
               ),
@@ -106,8 +126,11 @@ class MyEasyDialog {
                   textRightButton,
                   textAlign: TextAlign.justify,
                 ),
-                onPressed: onPressedRightButton != null /// If the function is null, we just pop the dialog.
-                    ? () => _popAndExecuteFunction(onPressedRightButton, context)
+                onPressed: onPressedRightButton != null
+
+                    /// If the function is null, we just pop the dialog.
+                    ? () =>
+                        _popAndExecuteFunction(onPressedRightButton, context)
                     : () => Navigator.of(context).pop(),
                 isDestructiveAction: isRightButtonADestructiveAction,
               ),
@@ -124,7 +147,8 @@ class MyEasyDialog {
             title: Center(
                 child: new Text(
               title,
-              style: TextStyle(fontSize: titleFontSize, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  fontSize: titleFontSize, fontWeight: FontWeight.bold),
             )),
             content: new Text(
               message,
@@ -137,7 +161,9 @@ class MyEasyDialog {
                   textLeftButton,
                   style: TextStyle(fontSize: buttonFontSize),
                 ),
-                onPressed: onPressedLeftButton != null /// If the function is null, we just pop the dialog.
+                onPressed: onPressedLeftButton != null
+
+                    /// If the function is null, we just pop the dialog.
                     ? () => _popAndExecuteFunction(onPressedLeftButton, context)
                     : () => Navigator.of(context).pop(),
               ),
@@ -146,10 +172,15 @@ class MyEasyDialog {
                   textRightButton,
                   style: TextStyle(
                       fontSize: buttonFontSize,
-                      color: isRightButtonADestructiveAction ? Colors.redAccent : Colors.white),
+                      color: isRightButtonADestructiveAction
+                          ? Colors.redAccent
+                          : Colors.white),
                 ),
-                onPressed: onPressedRightButton != null /// If the function is null, we just pop the dialog.
-                    ? () => _popAndExecuteFunction(onPressedRightButton, context)
+                onPressed: onPressedRightButton != null
+
+                    /// If the function is null, we just pop the dialog.
+                    ? () =>
+                        _popAndExecuteFunction(onPressedRightButton, context)
                     : () => Navigator.of(context).pop(),
               ),
             ],
