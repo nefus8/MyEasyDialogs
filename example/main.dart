@@ -37,8 +37,7 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: () => MyEasyDialog.infoDialog(
                   context: context,
                   title: "Exemple",
-                  message: "I'm an infoDialog exemple !"
-              ),
+                  message: "I'm an infoDialog exemple !"),
               child: Text("Show infoDialog"),
             ),
             FlatButton(
@@ -47,8 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   title: "Exemple",
                   message: "I'm an infoDialog exemple !",
                   textLeftButton: "Yes",
-                  onPressedLeftButton: () => print("yes")
-              ),
+                  onPressedLeftButton: () => print("yes")),
               child: Text("Show dialogWithOptions"),
             ),
           ],
