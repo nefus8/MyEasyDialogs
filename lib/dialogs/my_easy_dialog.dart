@@ -10,6 +10,8 @@ class MyEasyDialog {
     @required String title,
     @required String message,
     String dismissButtonText = 'OK',
+    Color titleTextColor,
+    Color messageTextColor,
 
     /// you can change the dismiss button text
     double dismissButtonFontSize = 20,
@@ -52,11 +54,12 @@ class MyEasyDialog {
                 child: new Text(
               title,
               style: TextStyle(
-                  fontSize: titleFontSize, fontWeight: FontWeight.bold),
+                  fontSize: titleFontSize, fontWeight: FontWeight.bold, color: titleTextColor),
             )),
             content: new Text(
               message,
               textAlign: TextAlign.justify,
+              style: TextStyle(color: messageTextColor),
             ),
             actions: <Widget>[
               /// usually buttons at the bottom of the dialog
@@ -83,6 +86,8 @@ class MyEasyDialog {
       @required String title,
       @required String message,
       String textLeftButton = 'OK',
+      Color titleTextColor,
+      Color messageTextColor,
 
       /// You can change the dismiss button text
       String textRightButton = 'Cancel',
@@ -148,11 +153,12 @@ class MyEasyDialog {
                 child: new Text(
               title,
               style: TextStyle(
-                  fontSize: titleFontSize, fontWeight: FontWeight.bold),
+                  fontSize: titleFontSize, fontWeight: FontWeight.bold, color: titleTextColor),
             )),
             content: new Text(
               message,
               textAlign: TextAlign.justify,
+              style: TextStyle(color: messageTextColor),
             ),
             actions: <Widget>[
               /// Usually buttons at the bottom of the dialog

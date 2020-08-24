@@ -1,3 +1,8 @@
+## [0.0.5] - 24 August 2020
+
+* Adding possibility to change android text color.
+
+
 ## [0.0.4] - 20th of August 2020
 
 * Moving the example package
