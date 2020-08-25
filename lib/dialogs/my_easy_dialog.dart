@@ -53,7 +53,9 @@ class MyEasyDialog {
                 child: new Text(
               title,
               style: TextStyle(
-                  fontSize: titleFontSize, fontWeight: FontWeight.bold, color: titleTextColor),
+                  fontSize: titleFontSize,
+                  fontWeight: FontWeight.bold,
+                  color: titleTextColor),
             )),
             content: new Text(
               message,
@@ -152,7 +154,9 @@ class MyEasyDialog {
                 child: new Text(
               title,
               style: TextStyle(
-                  fontSize: titleFontSize, fontWeight: FontWeight.bold, color: titleTextColor),
+                  fontSize: titleFontSize,
+                  fontWeight: FontWeight.bold,
+                  color: titleTextColor),
             )),
             content: new Text(
               message,
