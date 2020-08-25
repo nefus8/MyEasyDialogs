@@ -1,3 +1,8 @@
+## [0.1.2] - 25 August 2020
+
+* Updating dependencies
+
+
 ## [0.1.1] - 25 August 2020
 
 * Web support

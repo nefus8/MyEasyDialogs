@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get_platform/get_platform.dart';
+import 'package:get_platform/get_platform/get_platform.dart';
 
 class MyEasyDialog {
   /// The info dialog will only show a text, a message and a dismiss button
