@@ -1,3 +1,8 @@
+## [0.1.1] - 25 August 2020
+
+* Web support
+
+
 ## [0.0.5] - 24 August 2020
 
 * Adding possibility to change android text color.

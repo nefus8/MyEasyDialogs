@@ -1,7 +1,6 @@
-import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get_platform/get_platform.dart';
 
 class MyEasyDialog {
   /// The info dialog will only show a text, a message and a dismiss button
@@ -21,7 +20,7 @@ class MyEasyDialog {
 
     /// you can change the title font size too but only on android
   }) {
-    if (Platform.isIOS) {
+    if (GetPlatform.isIos()) {
       /// This is to show the iOS dialog type with Cupertino Widgets
       showDialog(
         context: context,
@@ -103,7 +102,7 @@ class MyEasyDialog {
       double buttonFontSize = 20,
       double titleFontSize = 25}) {
     // flutter defined function
-    if (Platform.isIOS) {
+    if (GetPlatform.isIos()) {
       showDialog(
         context: context,
         builder: (BuildContext context) {
