@@ -204,4 +204,43 @@ class MyEasyDialog {
     Navigator.pop(context);
     function();
   }
+
+  static void loadingDialog({
+    @required BuildContext context,
+    String title = "",
+    Color titleTextColor,
+    double titleFontSize = 25,
+  }) {
+    if (GetPlatform.isIos()) {
+      /// This is to show the iOS dialog type with Cupertino Widgets
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return CupertinoAlertDialog(
+            title: title.trim() != "" ? Center(child: new Text(title)) : null,
+            content: new CupertinoActivityIndicator(),
+          );
+        },
+      );
+    } else {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          // return object of type Dialog
+          return AlertDialog(
+            title: Center(
+                child: new Text(
+                  title,
+                  style: TextStyle(
+                      fontSize: titleFontSize,
+                      fontWeight: FontWeight.bold,
+                      color: titleTextColor),
+                )
+            ),
+            content: new CircularProgressIndicator(),
+          );
+        },
+      );
+    }
+  }
 }

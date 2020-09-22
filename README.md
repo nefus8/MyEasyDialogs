@@ -6,7 +6,7 @@ This package will make your life easier. It allows you to create dialogues that 
   
 To use this package, add `my_easy_dialogs` as a [dependency in your pubspec.yaml file](https://flutter.io/platform-plugins/).  
 
-There is two types of dialogs for now. The first one is **infoDialog**. It will display a simple dialog with a title, a message adn a button to dismiss the dialog. The second one is **dialogWithOptions**. It will display a dialog with two buttons and you can add your custom function for each buttons.
+There is three types of dialogs for now. The first one is **infoDialog**. It will display a simple dialog with a title, a message adn a button to dismiss the dialog. The second one is **dialogWithOptions**. It will display a dialog with two buttons and you can add your custom function for each buttons. The third one is **loadingDialog**. It will display a dialog with a title if you want and a loading indicator.
  
 ## Parameters
 

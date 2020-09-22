@@ -1,3 +1,7 @@
+## [0.1.3] - 22 September 2020
+
+* Adding a loading dialog
+
 ## [0.1.2] - 25 August 2020
 
 * Updating dependencies
