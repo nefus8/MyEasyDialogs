@@ -1,3 +1,7 @@
+## [0.1.4] - 22 September 2020
+
+* You can now add a function to the infoDialog
+
 ## [0.1.3] - 22 September 2020
 
 * Adding a loading dialog

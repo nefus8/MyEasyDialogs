@@ -11,6 +11,7 @@ class MyEasyDialog {
     String dismissButtonText = 'OK',
     Color titleTextColor,
     Color messageTextColor,
+    VoidCallback onPressed,
 
     /// you can change the dismiss button text
     double dismissButtonFontSize = 20,
@@ -34,9 +35,8 @@ class MyEasyDialog {
                   dismissButtonText,
                   textAlign: TextAlign.justify,
                 ),
-
                 /// Does buttons are only to dismiss so the only function is the navigator that pops.
-                onPressed: () => Navigator.of(context).pop(),
+                onPressed: () => _infoDialogFunction(context, onPressed),
               )
             ],
           );
@@ -71,12 +71,19 @@ class MyEasyDialog {
                 ),
 
                 /// Does buttons are only to dismiss so the only function is the navigator that pops.
-                onPressed: () => Navigator.of(context).pop(),
+                onPressed: () => _infoDialogFunction(context, onPressed),
               ),
             ],
           );
         },
       );
+    }
+  }
+
+  static void _infoDialogFunction(BuildContext context, VoidCallback function) {
+    Navigator.of(context).pop();
+    if (function != null) {
+      function();
     }
   }
 
