@@ -1,6 +1,6 @@
 name: my_easy_dialogs
 description: This package will simplify your life by letting you create responsive dialogs the easiest way possible.
-version: 0.1.4
+version: 0.1.5
 homepage: https://github.com/nefus8/MyEasyDialogs
 
 environment:

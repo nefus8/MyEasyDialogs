@@ -250,4 +250,95 @@ class MyEasyDialog {
       );
     }
   }
+
+  static void textInputDialog({
+    @required BuildContext context,
+    @required String title,
+    @required String message,
+    TextEditingController editingController,
+    String dismissButtonText = 'OK',
+    Color titleTextColor,
+    Color messageTextColor,
+    VoidCallback onPressed,
+    VoidCallback onEditingComplete,
+    Function onChanged,
+    double dismissButtonFontSize = 20,
+    double titleFontSize = 25,
+    String placeHolder,
+  }) {
+    if (GetPlatform.isIos()) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return CupertinoAlertDialog(
+            title: Center(child: new Text(title)),
+            content: Column(
+              children: [
+                new Text(message),
+                SizedBox(height: 10,),
+                CupertinoTextField(
+                  controller: editingController,
+                  onChanged: (value) => onChanged(value),
+                  onEditingComplete: () => onEditingComplete(),
+                  placeholder: placeHolder,
+                )
+              ],
+            ),
+            actions: <Widget>[
+              CupertinoDialogAction(
+                child: Text(
+                  dismissButtonText,
+                  textAlign: TextAlign.justify,
+                ),
+                onPressed: () => _infoDialogFunction(context, onPressed),
+              )
+            ],
+          );
+        },
+      );
+    } else {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          // return object of type Dialog
+          return AlertDialog(
+            title: Center(
+                child: new Text(
+                  title,
+                  style: TextStyle(
+                      fontSize: titleFontSize,
+                      fontWeight: FontWeight.bold,
+                      color: titleTextColor),
+                )),
+            content: Column(
+              children: [
+                new Text(
+                  message,
+                  textAlign: TextAlign.justify,
+                  style: TextStyle(color: messageTextColor),
+                ),
+                TextField(
+                  onEditingComplete: () => onEditingComplete(),
+                  onChanged: (value) => onChanged(value),
+                  controller: editingController,
+                  decoration: InputDecoration(
+                    labelText: placeHolder,
+                  ),
+                )
+              ],
+            ),
+            actions: <Widget>[
+              new FlatButton(
+                child: new Text(
+                  dismissButtonText,
+                  style: TextStyle(fontSize: dismissButtonFontSize),
+                ),
+                onPressed: () => _infoDialogFunction(context, onPressed),
+              ),
+            ],
+          );
+        },
+      );
+    }
+  }
 }

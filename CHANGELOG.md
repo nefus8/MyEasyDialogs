@@ -1,3 +1,7 @@
+## [0.1.5] - 22 September 2020
+
+* Adding the textInputDialog
+
 ## [0.1.4] - 22 September 2020
 
 * You can now add a function to the infoDialog
