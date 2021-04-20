@@ -1,3 +1,7 @@
+## [1.0.0] - 20 april 2021
+
+* Updating depreciated content.
+
 ## [0.1.5] - 22 September 2020
 
 * Adding the textInputDialog

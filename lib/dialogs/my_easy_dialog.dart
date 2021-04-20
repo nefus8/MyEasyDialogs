@@ -64,7 +64,7 @@ class MyEasyDialog {
             ),
             actions: <Widget>[
               /// usually buttons at the bottom of the dialog
-              new FlatButton(
+              new TextButton(
                 child: new Text(
                   dismissButtonText,
                   style: TextStyle(fontSize: dismissButtonFontSize),
