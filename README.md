@@ -6,7 +6,9 @@ This package will make your life easier. It allows you to create dialogues that 
   
 To use this package, add `my_easy_dialogs` as a [dependency in your pubspec.yaml file](https://flutter.io/platform-plugins/).  
 
-There is three types of dialogs for now. The first one is **infoDialog**. It will display a simple dialog with a title, a message adn a button to dismiss the dialog. The second one is **dialogWithOptions**. It will display a dialog with two buttons and you can add your custom function for each buttons. The third one is **loadingDialog**. It will display a dialog with a title if you want and a loading indicator.
+There is three types of dialogs for now. The first one is **infoDialog**. It will display a simple dialog with a title, a message adn a button to dismiss the dialog. The second one is **dialogWithOptions**. 
+It will display a dialog with two buttons and you can add your custom function for each buttons. The third one is **loadingDialog**. It will display a dialog with a title if you want and a loading indicator.
+A new dialog type is available : the **textInputDialog**, it will show a dialog with a textfield included to write something.
  
 ## Parameters
 
@@ -35,7 +37,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  MyHomePage({Key? key, required this.title}) : super(key: key);
   final String title;
 
   @override
@@ -53,22 +55,20 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            FlatButton(
+            TextButton(
               onPressed: () => MyEasyDialog.infoDialog(
                   context: context,
                   title: "Exemple",
-                  message: "I'm an infoDialog exemple !"
-              ),
+                  message: "I'm an infoDialog exemple !"),
               child: Text("Show infoDialog"),
             ),
-            FlatButton(
+            TextButton(
               onPressed: () => MyEasyDialog.dialogWithOptions(
                   context: context,
                   title: "Exemple",
                   message: "I'm an infoDialog exemple !",
                   textLeftButton: "Yes",
-                  onPressedLeftButton: () => print("yes")
-              ),
+                  onPressedLeftButton: () => print("yes")),
               child: Text("Show dialogWithOptions"),
             ),
           ],

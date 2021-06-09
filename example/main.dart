@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  MyHomePage({Key? key, required this.title}) : super(key: key);
   final String title;
 
   @override
@@ -33,14 +33,14 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            FlatButton(
+            TextButton(
               onPressed: () => MyEasyDialog.infoDialog(
                   context: context,
                   title: "Exemple",
                   message: "I'm an infoDialog exemple !"),
               child: Text("Show infoDialog"),
             ),
-            FlatButton(
+            TextButton(
               onPressed: () => MyEasyDialog.dialogWithOptions(
                   context: context,
                   title: "Exemple",

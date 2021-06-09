@@ -1,3 +1,12 @@
+## [2.0.1] - 09 june 2021
+
+* Null safety
+* New dialog, the ```textInputDialog```
+
+## [2.0.0] - 09 june 2021
+
+* Null safety
+
 ## [1.0.0] - 20 april 2021
 
 * Updating depreciated content.

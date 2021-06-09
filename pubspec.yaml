@@ -1,16 +1,15 @@
 name: my_easy_dialogs
 description: This package will simplify your life by letting you create responsive dialogs the easiest way possible.
-version: 1.0.0
+version: 2.0.1
 homepage: https://github.com/nefus8/MyEasyDialogs
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=2.12.0 <3.0.0"
   flutter: ">=1.17.0"
 
 dependencies:
   flutter:
     sdk: flutter
-  get_platform: ^0.0.2
 
 dev_dependencies:
   flutter_test:

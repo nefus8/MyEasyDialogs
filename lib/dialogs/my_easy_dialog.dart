@@ -1,17 +1,17 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get_platform/get_platform/get_platform.dart';
 
 class MyEasyDialog {
+
   /// The info dialog will only show a text, a message and a dismiss button
   static void infoDialog({
-    @required BuildContext context,
-    @required String title,
-    @required String message,
+    required BuildContext context,
+    required String title,
+    required String message,
     String dismissButtonText = 'OK',
-    Color titleTextColor,
-    Color messageTextColor,
-    VoidCallback onPressed,
+    VoidCallback? onPressed,
 
     /// you can change the dismiss button text
     double dismissButtonFontSize = 20,
@@ -19,213 +19,37 @@ class MyEasyDialog {
     /// you can change the dismiss button font size too but only on android
     double titleFontSize = 25,
 
-    /// you can change the title font size too but only on android
+    /// You can change all the colors
+    Color? titleTextColor,
+    Color? messageTextColor,
+    Color dismissAndroidButtonColor = Colors.lightBlue
   }) {
-    if (GetPlatform.isIos()) {
-      /// This is to show the iOS dialog type with Cupertino Widgets
+    /// This is to show the iOS dialog type with Cupertino Widgets
+    if (Platform.isIOS) {
+
+      /// Cupertino dialogs
       showDialog(
         context: context,
         builder: (BuildContext context) {
           return CupertinoAlertDialog(
             title: Center(child: new Text(title)),
-            content: new Text(message),
+            content: new Text(message, style: TextStyle(color: titleTextColor),),
             actions: <Widget>[
               CupertinoDialogAction(
                 child: Text(
                   dismissButtonText,
                   textAlign: TextAlign.justify,
+                  style: TextStyle(color: messageTextColor),
                 ),
-                /// Does buttons are only to dismiss so the only function is the navigator that pops.
-                onPressed: () => _infoDialogFunction(context, onPressed),
+                onPressed: () {
+                  /// Does buttons are only to dismiss so the only function is the navigator that pops.
+                  Navigator.pop(context);
+                  if (onPressed != null) {
+                    onPressed();
+                  }
+                },
               )
             ],
-          );
-        },
-      );
-    } else {
-      showDialog(
-        /// Here is the part to show the android version which is just a simple dialog
-        context: context,
-        builder: (BuildContext context) {
-          // return object of type Dialog
-          return AlertDialog(
-            title: Center(
-                child: new Text(
-              title,
-              style: TextStyle(
-                  fontSize: titleFontSize,
-                  fontWeight: FontWeight.bold,
-                  color: titleTextColor),
-            )),
-            content: new Text(
-              message,
-              textAlign: TextAlign.justify,
-              style: TextStyle(color: messageTextColor),
-            ),
-            actions: <Widget>[
-              /// usually buttons at the bottom of the dialog
-              new TextButton(
-                child: new Text(
-                  dismissButtonText,
-                  style: TextStyle(fontSize: dismissButtonFontSize),
-                ),
-
-                /// Does buttons are only to dismiss so the only function is the navigator that pops.
-                onPressed: () => _infoDialogFunction(context, onPressed),
-              ),
-            ],
-          );
-        },
-      );
-    }
-  }
-
-  static void _infoDialogFunction(BuildContext context, VoidCallback function) {
-    Navigator.of(context).pop();
-    if (function != null) {
-      function();
-    }
-  }
-
-  /// Here is the dialog with options, it's useful if you want to pop up a dialog where you can choose between two
-  /// options. One of them can be set as destructive action.
-  static void dialogWithOptions(
-      {@required BuildContext context,
-      @required String title,
-      @required String message,
-      String textLeftButton = 'OK',
-      Color titleTextColor,
-      Color messageTextColor,
-
-      /// You can change the dismiss button text
-      String textRightButton = 'Cancel',
-
-      /// You can change the other button text
-      Function onPressedLeftButton,
-
-      /// You can add your custom functions for the two buttons
-      Function onPressedRightButton,
-      bool isRightButtonADestructiveAction = true,
-
-      /// If set to true, the right button will be considered as a destructive button and will be colored in red
-      double buttonFontSize = 20,
-      double titleFontSize = 25}) {
-    // flutter defined function
-    if (GetPlatform.isIos()) {
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          /// Cupertino dialogs
-          return CupertinoAlertDialog(
-            title: Center(child: new Text(title)),
-            content: new Text(message),
-            actions: <Widget>[
-              CupertinoDialogAction(
-                child: Text(
-                  textLeftButton,
-                  textAlign: TextAlign.justify,
-                ),
-                isDefaultAction: true,
-
-                /// This is the default action
-                onPressed: onPressedLeftButton != null
-
-                    /// If the function is null, we just pop the dialog.
-                    ? () => _popAndExecuteFunction(onPressedLeftButton, context)
-                    : () => Navigator.of(context).pop(),
-              ),
-              CupertinoDialogAction(
-                child: Text(
-                  textRightButton,
-                  textAlign: TextAlign.justify,
-                ),
-                onPressed: onPressedRightButton != null
-
-                    /// If the function is null, we just pop the dialog.
-                    ? () =>
-                        _popAndExecuteFunction(onPressedRightButton, context)
-                    : () => Navigator.of(context).pop(),
-                isDestructiveAction: isRightButtonADestructiveAction,
-              ),
-            ],
-          );
-        },
-      );
-    } else {
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          /// return object of type Dialog for android
-          return AlertDialog(
-            title: Center(
-                child: new Text(
-              title,
-              style: TextStyle(
-                  fontSize: titleFontSize,
-                  fontWeight: FontWeight.bold,
-                  color: titleTextColor),
-            )),
-            content: new Text(
-              message,
-              textAlign: TextAlign.justify,
-              style: TextStyle(color: messageTextColor),
-            ),
-            actions: <Widget>[
-              /// Usually buttons at the bottom of the dialog
-              new FlatButton(
-                child: new Text(
-                  textLeftButton,
-                  style: TextStyle(fontSize: buttonFontSize),
-                ),
-                onPressed: onPressedLeftButton != null
-
-                    /// If the function is null, we just pop the dialog.
-                    ? () => _popAndExecuteFunction(onPressedLeftButton, context)
-                    : () => Navigator.of(context).pop(),
-              ),
-              new FlatButton(
-                child: new Text(
-                  textRightButton,
-                  style: TextStyle(
-                      fontSize: buttonFontSize,
-                      color: isRightButtonADestructiveAction
-                          ? Colors.redAccent
-                          : Colors.white),
-                ),
-                onPressed: onPressedRightButton != null
-
-                    /// If the function is null, we just pop the dialog.
-                    ? () =>
-                        _popAndExecuteFunction(onPressedRightButton, context)
-                    : () => Navigator.of(context).pop(),
-              ),
-            ],
-          );
-        },
-      );
-    }
-  }
-
-  /// The function that will pop the dialog and execute the custom function we want to execute.
-  static void _popAndExecuteFunction(Function function, BuildContext context) {
-    Navigator.pop(context);
-    function();
-  }
-
-  static void loadingDialog({
-    @required BuildContext context,
-    String title = "",
-    Color titleTextColor,
-    double titleFontSize = 25,
-  }) {
-    if (GetPlatform.isIos()) {
-      /// This is to show the iOS dialog type with Cupertino Widgets
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return CupertinoAlertDialog(
-            title: title.trim() != "" ? Center(child: new Text(title)) : null,
-            content: new CupertinoActivityIndicator(),
           );
         },
       );
@@ -241,10 +65,179 @@ class MyEasyDialog {
                   style: TextStyle(
                       fontSize: titleFontSize,
                       fontWeight: FontWeight.bold,
-                      color: titleTextColor),
-                )
+                      color: titleTextColor == null ? Colors.grey.shade800 : titleTextColor),
+                )),
+            content: new Text(
+              message,
+              textAlign: TextAlign.justify,
+              style: TextStyle(color: messageTextColor == null ? Colors.grey.shade800 : messageTextColor),
             ),
-            content: new CircularProgressIndicator(),
+            actions: <Widget>[
+              new TextButton(
+                /// usually buttons at the bottom of the dialog
+                child: new Text(
+                  dismissButtonText,
+                  style: TextStyle(fontSize: dismissButtonFontSize, color: dismissAndroidButtonColor),
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                  /// Does buttons are only to dismiss so the only function is the navigator that pops.
+                  if (onPressed != null) {
+                    onPressed();
+                  }
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
+  }
+
+  /// Here is the dialog with options, it's useful if you want to pop up a dialog where you can choose between two
+  /// options. One of them can be set as destructive action.
+  static void dialogWithOptions(
+      {required BuildContext context,
+        required String title,
+        required String message,
+        String textLeftButton = 'OK',
+        Color? titleTextColor,
+        Color? messageTextColor,
+
+        /// You can change the dismiss button text
+        String textRightButton = 'Cancel',
+        Function? onPressedLeftButton,
+        Function? onPressedRightButton,
+
+        /// If set to true, the right button will be considered as a destructive button and will be colored in red
+        bool isRightButtonADestructiveAction = true,
+        double buttonFontSize = 20,
+        double titleFontSize = 25}) {
+    if (Platform.isIOS) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          /// Cupertino dialogs
+          return CupertinoAlertDialog(
+            title: Center(child: new Text(title)),
+            content: new Text(message),
+            actions: <Widget>[
+              CupertinoDialogAction(
+                child: Text(
+                  textLeftButton,
+                  textAlign: TextAlign.justify,
+                ),
+                isDefaultAction: true,
+                /// This is the default action
+                onPressed: onPressedLeftButton != null
+                    ? () {
+                  Navigator.pop(context);
+                  onPressedLeftButton();
+                }
+                    : () => Navigator.of(context).pop(),
+              ),
+              CupertinoDialogAction(
+                child: Text(
+                  textRightButton,
+                  textAlign: TextAlign.justify,
+                ),
+                /// If the function is null, we just pop the dialog.
+                onPressed: onPressedRightButton != null
+                    ? () {
+                  Navigator.pop(context);
+                  onPressedRightButton();
+                }
+                    : () => Navigator.of(context).pop(),
+                isDestructiveAction: isRightButtonADestructiveAction,
+              ),
+            ],
+          );
+        },
+      );
+    } else {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Center(
+                child: new Text(
+                  title,
+                  style: TextStyle(
+                      fontSize: titleFontSize,
+                      fontWeight: FontWeight.bold,
+                      color: titleTextColor),
+                )),
+            content: new Text(
+              message,
+              textAlign: TextAlign.justify,
+              style: TextStyle(color: messageTextColor),
+            ),
+            actions: <Widget>[
+              new TextButton(
+                child: new Text(
+                  textLeftButton,
+                  style: TextStyle(fontSize: buttonFontSize),
+                ),
+                onPressed: onPressedLeftButton != null
+                    ? () {
+                  Navigator.pop(context);
+                  onPressedLeftButton();
+                }
+                    : () => Navigator.of(context).pop(),
+              ),
+              new TextButton(
+                child: new Text(
+                  textRightButton,
+                  style: TextStyle(
+                      fontSize: buttonFontSize,
+                      color: isRightButtonADestructiveAction
+                          ? Colors.redAccent
+                          : Colors.white),
+                ),
+                /// If the function is null, we just pop the dialog.
+                onPressed: onPressedRightButton != null
+                    ? () {
+                  Navigator.pop(context);
+                  onPressedRightButton();
+                } /// If the function is null, we just pop the dialog.
+                    : () => Navigator.of(context).pop(),
+              ),
+            ],
+          );
+        },
+      );
+    }
+  }
+
+  static void loadingDialog({
+
+    required BuildContext context,
+    String title = "",
+    double titleFontSize = 25,
+    Color? androidLoadingColor,
+  }) {
+    if (Platform.isIOS) {
+      /// This is to show the iOS dialog type with Cupertino Widgets
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return CupertinoAlertDialog(
+            content: new CupertinoActivityIndicator(),
+          );
+        },
+      );
+    } else {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          // return object of type Dialog
+          return AlertDialog(
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Center(child: new CircularProgressIndicator(color: androidLoadingColor,)),
+                ],
+              )
           );
         },
       );
@@ -252,21 +245,21 @@ class MyEasyDialog {
   }
 
   static void textInputDialog({
-    @required BuildContext context,
-    @required String title,
-    @required String message,
-    TextEditingController editingController,
+    required BuildContext context,
+    required String title,
+    required String message,
+    TextEditingController? editingController,
     String dismissButtonText = 'OK',
-    Color titleTextColor,
-    Color messageTextColor,
-    VoidCallback onPressed,
-    VoidCallback onEditingComplete,
-    Function onChanged,
+    Color? titleTextColor,
+    Color? messageTextColor,
+    VoidCallback? onPressed,
+    VoidCallback? onEditingComplete,
+    Function? onChanged,
     double dismissButtonFontSize = 20,
     double titleFontSize = 25,
-    String placeHolder,
+    String? placeHolder,
   }) {
-    if (GetPlatform.isIos()) {
+    if (Platform.isIOS) {
       showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -278,8 +271,8 @@ class MyEasyDialog {
                 SizedBox(height: 10,),
                 CupertinoTextField(
                   controller: editingController,
-                  onChanged: (value) => onChanged(value),
-                  onEditingComplete: () => onEditingComplete(),
+                  onChanged: (value) => onChanged == null ? {} : onChanged(value),
+                  onEditingComplete: () => onEditingComplete == null ? {} : onEditingComplete(),
                   placeholder: placeHolder,
                 )
               ],
@@ -290,7 +283,13 @@ class MyEasyDialog {
                   dismissButtonText,
                   textAlign: TextAlign.justify,
                 ),
-                onPressed: () => _infoDialogFunction(context, onPressed),
+                onPressed: () {
+                  Navigator.pop(context);
+                  /// Pop and do the function if not null
+                  if (onPressed != null) {
+                    onPressed();
+                  }
+                },
               )
             ],
           );
@@ -318,8 +317,8 @@ class MyEasyDialog {
                   style: TextStyle(color: messageTextColor),
                 ),
                 TextField(
-                  onEditingComplete: () => onEditingComplete(),
-                  onChanged: (value) => onChanged(value),
+                  onChanged: (value) => onChanged == null ? {} : onChanged(value),
+                  onEditingComplete: () => onEditingComplete == null ? {} : onEditingComplete(),
                   controller: editingController,
                   decoration: InputDecoration(
                     labelText: placeHolder,
@@ -328,12 +327,18 @@ class MyEasyDialog {
               ],
             ),
             actions: <Widget>[
-              new FlatButton(
+              new TextButton(
                 child: new Text(
                   dismissButtonText,
                   style: TextStyle(fontSize: dismissButtonFontSize),
                 ),
-                onPressed: () => _infoDialogFunction(context, onPressed),
+                onPressed: () {
+                  Navigator.pop(context);
+                  /// Pop and do the function if not null
+                  if (onPressed != null) {
+                    onPressed();
+                  }
+                },
               ),
             ],
           );
